@@ -1,0 +1,12 @@
+# Configuração do Doxygen para os arquivos Python do projeto.
+PROJECT_NAME           = "Sistema Digital do RU"
+PROJECT_BRIEF          = "Documentação das classes do protótipo acadêmico"
+OUTPUT_DIRECTORY       = docs
+INPUT                  = .
+FILE_PATTERNS          = *.py
+RECURSIVE              = NO
+EXTRACT_ALL             = YES
+GENERATE_HTML           = YES
+HTML_OUTPUT             = html
+GENERATE_LATEX          = NO
+QUIET                   = YES
