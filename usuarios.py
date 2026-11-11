@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pedidos import Pedido
 
+
 class Usuario(ABC):
     """
     @brief Classe abstrata que representa um usuário do RU.
@@ -27,22 +28,25 @@ class Usuario(ABC):
 
     @property
     def nome(self) -> str:
-        # Obtém o nome do usuário.
+        """
+        @brief Obtém o nome do usuário.
+        @return Nome completo do usuário.
+        """
         return self._nome
 
     @property
     def email(self) -> str:
-        # Obtém o e-mail do usuário.
+        """@brief Obtém o e-mail do usuário."""
         return self._email
 
     @property
     def identificador(self) -> str:
-        # Obtém o identificador base do usuário.
+        """@brief Obtém o identificador base do usuário."""
         return self._identificador
 
     @property
     def pedidos(self) -> list["Pedido"]:
-    # Retorna uma cópia da lista de pedidos do usuário.
+        """@brief Retorna uma cópia da lista de pedidos do usuário."""
         return list(self._pedidos)
 
     def adicionar_pedido(self, pedido: "Pedido") -> None:
@@ -62,7 +66,9 @@ class Usuario(ABC):
 
 
 class Aluno(Usuario):
-    # Usuário do RU identificado pelo Registro Acadêmico (RA).
+    """
+    @brief Usuário do RU identificado pelo Registro Acadêmico (RA).
+    """
 
     def __init__(self, nome: str, email: str, ra: str) -> None:
         super().__init__(nome, email, ra)
@@ -70,7 +76,10 @@ class Aluno(Usuario):
 
     @property
     def ra(self) -> str:
-        """@brief Obtém o Registro Acadêmico do aluno."""
+        """
+        @brief Obtém o Registro Acadêmico do aluno.
+        @return RA do aluno.
+        """
         return self._ra
 
     def gerar_codigo_identificacao(self) -> str:
@@ -82,7 +91,9 @@ class Aluno(Usuario):
 
 
 class Servidor(Usuario):
-    # Usuário do RU identificado por seu ID funcional.
+    """
+    @brief Usuário do RU identificado por seu ID funcional.
+    """
 
     def __init__(self, nome: str, email: str, id_servidor: str) -> None:
         super().__init__(nome, email, id_servidor)
@@ -90,7 +101,10 @@ class Servidor(Usuario):
 
     @property
     def id_servidor(self) -> str:
-        """@brief Obtém o ID funcional do servidor."""
+        """
+        @brief Obtém o ID funcional do servidor.
+        @return ID funcional do servidor.
+        """
         return self._id_servidor
 
     def gerar_codigo_identificacao(self) -> str:
@@ -99,11 +113,16 @@ class Servidor(Usuario):
         @return Código no formato SERVIDOR-<ID>.
         """
         return f"SERVIDOR-{self._id_servidor}"
+
+
 class Externo(Usuario):
-    # Usuário externo identificado pelo código de cadastro.
+    """
+    @brief Usuário externo identificado pelo código de cadastro.
+    """
 
     def gerar_codigo_identificacao(self) -> str:
-        """@brief Gera a identificação do usuário externo.
+        """
+        @brief Gera a identificação do usuário externo.
         @return Código no formato EXTERNO-<identificador>.
         """
         return f"EXTERNO-{self._identificador}"

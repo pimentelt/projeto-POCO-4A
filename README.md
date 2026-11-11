@@ -10,14 +10,14 @@ O sistema prevê cadastro de alunos por RA, servidores por ID e público externo
 
 ## Divisão das classes
 
-1. **Usuários e carteira digital** — `Usuario` é a classe abstrata. `Aluno`, `Servidor` e `Externo` herdam dela; cada usuário possui uma `CarteiraDigital`.
+1. **Usuários e carteira digital** — `Usuario` é a classe abstrata. `Aluno`, `Servidor` e `Externo` herdam dela; cada usuário possui uma `CarteiraDigital`. (Na sprint 2 retiramos a 'CarteiraDigital' pois seria muito burocrático para o Restaurante Universitário )
 2. **Pedido e itens do cardápio** — `Pedido` reúne itens existentes do cardápio e calcula o total. O código de retirada é gerado ao criar o pedido.
 3. **Caixa e pagamento** — `CaixaRU` recebe pagamento em espécie, confere o código de retirada e confirma a entrega. `MetodoPagamento` enumera as opções previstas.
 
 ## Conceitos de POO
 
 - **Herança e abstração:** `Aluno`, `Servidor` e `Externo` especializam `Usuario`, que define um contrato abstrato para gerar identificação.
-- **Composição:** cada instância de `Usuario` cria e mantém sua `CarteiraDigital`.
+- **Composição:** cada instância de `Usuario` cria e mantém sua `CarteiraDigital`. (Na sprint 2 retiramos a 'CarteiraDigital' pois seria muito burocrático para o Restaurante Universitário )
 - **Agregação:** `Pedido` guarda referências a `ItemCardapio`; os itens também podem existir fora dos pedidos.
 - **Associação:** um `Usuario` pode estar associado a vários `Pedido`; cada pedido também mantém referência ao usuário que o criou.
 - **Dependência:** `CaixaRU` usa `Pedido` e `MetodoPagamento` para registrar pagamento em espécie e validar a retirada.
