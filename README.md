@@ -11,7 +11,7 @@ O sistema prevê cadastro de alunos por RA, servidores por ID e público externo
 ## Divisão das classes
 
 1. **Usuários e carteira digital** — `Usuario` é a classe abstrata. `Aluno`, `Servidor` e `Externo` herdam dela; cada usuário possui uma `CarteiraDigital`. (Na sprint 2 retiramos a 'CarteiraDigital' pois seria muito burocrático para o Restaurante Universitário )
-2. **Pedido e itens do cardápio** — `Pedido` reúne itens existentes do cardápio e calcula o total. O código de retirada é gerado ao criar o pedido.
+2. **Pedido, itens do cardápio e Cardápio** — `Pedido` reúne itens existentes do cardápio e calcula o total. O código de retirada é gerado ao criar o pedido.
 3. **Caixa e pagamento** — `CaixaRU` recebe pagamento em espécie, confere o código de retirada e confirma a entrega. `MetodoPagamento` enumera as opções previstas.
 
 ## Conceitos de POO
@@ -55,5 +55,5 @@ doxygen Doxyfile
 ## Próximos passos
 
 - Implementar o pagamento simulado por carteira digital, PIX e cartão.
-- Adicionar persistência de dados, cadastro de cardápio e interface para o usuário.
+- Adicionar persistência de dados e interface para o usuário.
 - Tratar valores monetários com `Decimal` e definir regras de negócio em conjunto com o grupo.
