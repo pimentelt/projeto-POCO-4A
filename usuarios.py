@@ -1,119 +1,109 @@
-"""@file usuarios.py
-@brief Define os usuários do RU e suas carteiras digitais.
+"""
+@file usuarios.py
+@brief Define os usuários do RU.
 @details Contém a classe abstrata Usuario e os perfis Aluno, Servidor e Externo.
 """
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from pedidos import Pedido
 
-
-@dataclass
-class CarteiraDigital:
-    """@brief Representa a carteira digital de um usuário.
-
-    @details A carteira é criada junto com o usuário e mantém seu saldo em memória.
-    @param saldo Saldo inicial da carteira, em reais.
-    """
-
-    saldo: float = 0.0
-
-    def depositar(self, valor: float) -> None:
-        """@brief Adiciona um valor ao saldo.
-
-        @param valor Quantia a depositar, em reais.
-        @throws ValueError Se o valor não for maior que zero.
-        """
-        if valor <= 0:
-            raise ValueError("O depósito deve ser maior que zero.")
-        self.saldo += valor
-
-    def debitar(self, valor: float) -> None:
-        """@brief Retira um valor do saldo.
-
-        @param valor Quantia a debitar, em reais.
-        @throws ValueError Se o valor não for positivo ou superar o saldo disponível.
-        """
-        if valor <= 0:
-            raise ValueError("O débito deve ser maior que zero.")
-        if valor > self.saldo:
-            raise ValueError("Saldo insuficiente.")
-        self.saldo -= valor
-
-
 class Usuario(ABC):
-    """@brief Classe abstrata que representa um usuário do RU.
-
-    @details Cada usuário possui uma carteira digital e uma lista de pedidos associados.
-    As subclasses devem implementar gerar_codigo_identificacao().
+    """
+    @brief Classe abstrata que representa um usuário do RU.
+    @details Mantém os dados cadastrais e a lista de pedidos associados.
     @param nome Nome completo do usuário.
     @param email Endereço de e-mail do usuário.
     @param identificador RA, ID funcional ou código de cadastro.
     """
 
     def __init__(self, nome: str, email: str, identificador: str) -> None:
-        self.nome = nome
-        self.email = email
-        self.identificador = identificador
-        self.carteira = CarteiraDigital()
-        self.pedidos: list[Pedido] = []
+        self._nome = nome
+        self._email = email
+        self._identificador = identificador
+        self._pedidos: list["Pedido"] = []
+
+    @property
+    def nome(self) -> str:
+        # Obtém o nome do usuário.
+        return self._nome
+
+    @property
+    def email(self) -> str:
+        # Obtém o e-mail do usuário.
+        return self._email
+
+    @property
+    def identificador(self) -> str:
+        # Obtém o identificador base do usuário.
+        return self._identificador
+
+    @property
+    def pedidos(self) -> list["Pedido"]:
+    # Retorna uma cópia da lista de pedidos do usuário.
+        return list(self._pedidos)
+
+    def adicionar_pedido(self, pedido: "Pedido") -> None:
+        """
+        @brief Associa um novo pedido ao histórico do usuário.
+        @param pedido Instância do pedido criado.
+        """
+        self._pedidos.append(pedido)
 
     @abstractmethod
     def gerar_codigo_identificacao(self) -> str:
-        """@brief Gera o código de identificação do usuário.
-
-        @return Código de identificação formatado conforme o perfil.
         """
+        @brief Gera o código de identificação formatado do usuário.
+        @return Código de identificação formatado conforme a subclasse.
+        """
+        pass
 
 
 class Aluno(Usuario):
-    """@brief Usuário do RU identificado pelo Registro Acadêmico (RA).
-
-    @param nome Nome completo do aluno.
-    @param email Endereço de e-mail do aluno.
-    @param ra Registro Acadêmico do aluno.
-    """
+    # Usuário do RU identificado pelo Registro Acadêmico (RA).
 
     def __init__(self, nome: str, email: str, ra: str) -> None:
         super().__init__(nome, email, ra)
-        self.ra = ra
+        self._ra = ra
+
+    @property
+    def ra(self) -> str:
+        """@brief Obtém o Registro Acadêmico do aluno."""
+        return self._ra
 
     def gerar_codigo_identificacao(self) -> str:
-        """@brief Gera a identificação do aluno.
+        """
+        @brief Gera a identificação do aluno.
         @return Código no formato ALUNO-<RA>.
         """
-        return f"ALUNO-{self.ra}"
+        return f"ALUNO-{self._ra}"
 
 
 class Servidor(Usuario):
-    """@brief Usuário do RU identificado por seu ID funcional.
-
-    @param nome Nome completo do servidor.
-    @param email Endereço de e-mail do servidor.
-    @param id_servidor Identificador funcional do servidor.
-    """
+    # Usuário do RU identificado por seu ID funcional.
 
     def __init__(self, nome: str, email: str, id_servidor: str) -> None:
         super().__init__(nome, email, id_servidor)
-        self.id_servidor = id_servidor
+        self._id_servidor = id_servidor
+
+    @property
+    def id_servidor(self) -> str:
+        """@brief Obtém o ID funcional do servidor."""
+        return self._id_servidor
 
     def gerar_codigo_identificacao(self) -> str:
-        """@brief Gera a identificação do servidor.
+        """
+        @brief Gera a identificação do servidor.
         @return Código no formato SERVIDOR-<ID>.
         """
-        return f"SERVIDOR-{self.id_servidor}"
-
-
+        return f"SERVIDOR-{self._id_servidor}"
 class Externo(Usuario):
-    """@brief Usuário externo identificado pelo código de cadastro.
-    @details Recebe nome, e-mail e identificador no construtor herdado de Usuario.
-    """
+    # Usuário externo identificado pelo código de cadastro.
 
     def gerar_codigo_identificacao(self) -> str:
         """@brief Gera a identificação do usuário externo.
         @return Código no formato EXTERNO-<identificador>.
         """
-        return f"EXTERNO-{self.identificador}"
+        return f"EXTERNO-{self._identificador}"
