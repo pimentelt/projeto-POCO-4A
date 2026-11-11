@@ -71,6 +71,8 @@ class Aluno(Usuario):
     """
 
     def __init__(self, nome: str, email: str, ra: str) -> None:
+        if not ra.isdigit() or len(ra) != 7:
+            raise ValueError("O RA do aluno deve conter exatamente 7 dígitos numéricos.")
         super().__init__(nome, email, ra)
         self._ra = ra
 
@@ -96,6 +98,8 @@ class Servidor(Usuario):
     """
 
     def __init__(self, nome: str, email: str, id_servidor: str) -> None:
+        if not id_servidor.isdigit() or len(id_servidor) != 8:
+            raise ValueError("O ID do servidor deve conter exatamente 8 dígitos numéricos.")
         super().__init__(nome, email, id_servidor)
         self._id_servidor = id_servidor
 
