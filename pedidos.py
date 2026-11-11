@@ -139,7 +139,7 @@ class Cardapio:
 
     def adicionar_item(self, item: ItemCardapio) -> None:
         "brief Adiciona um novo item ao cardápio oficial."
-        self._itens_disponiveis.adicionarItem(item)
+        self._itens_disponiveis.append(item)
 
     @property
     def itens(self) -> list[ItemCardapio]:

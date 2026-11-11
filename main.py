@@ -42,7 +42,7 @@ def main() -> None:
 
 
     print("Exemplo Servidor fazendo pedido\n")
-    usuario = Servidor("Luiz", "Luiz@exemplo.com", "1234567")
+    usuario = Servidor("Luiz", "Luiz@exemplo.com", "12345678")
     pedido = Pedido(2, usuario)
     pedido.adicionar_item(cardapio_ru.buscar_por_id(4), quantidade=2)
     pedido.adicionar_item(cardapio_ru.buscar_por_id(3), quantidade=1)
