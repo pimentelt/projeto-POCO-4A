@@ -3,7 +3,7 @@ brief Ponto de entrada da demonstração do sistema do RU.
 """
 
 from caixa import CaixaRU
-from pedidos import ItemCardapio, Pedido, Cardapio
+from pedidos import ItemCardapio, Pedido, Cardapio, criar_cardapio_padrao
 from usuarios import Aluno, Servidor, Externo
 
 
@@ -12,18 +12,7 @@ def main() -> None:
     @details Cria dados temporários e imprime o resultado no terminal.
     """
     "cardapio é uma calsse que agrupa os itens"
-    cardapio_ru = Cardapio() 
-
-    cardapio_ru.adicionar_item(ItemCardapio(1, "Prato do Dia", 12.50))
-    cardapio_ru.adicionar_item(ItemCardapio(2, "Agua s/gas", 3.00))
-    cardapio_ru.adicionar_item(ItemCardapio(3, "Agua c/gas", 3.50))
-    cardapio_ru.adicionar_item(ItemCardapio(4, "Salgados assados", 6.50))
-    cardapio_ru.adicionar_item(ItemCardapio(5, "Salgados Fritos", 5.00))
-    cardapio_ru.adicionar_item(ItemCardapio(6, "Bolo Gelado", 10.00))
-    cardapio_ru.adicionar_item(ItemCardapio(7, "Suco Natural de Laranja (300ml)", 3.50))
-    cardapio_ru.adicionar_item(ItemCardapio(8, "Suco Natural de Uva (300ml)", 3.00))
-    cardapio_ru.adicionar_item(ItemCardapio(9, "Refrigerante Lata(coca, fanta e guaraná)", 5.00))
-    cardapio_ru.adicionar_item(ItemCardapio(10, "Bombom", 3.00))
+    cardapio_ru = criar_cardapio_padrao()
 
     print("Exemplo Aluno fazendo pedido\n")
     usuario = Aluno("Ana", "ana@exemplo.com", "1234567")
