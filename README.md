@@ -27,12 +27,15 @@ O sistema prevê cadastro de alunos por RA, servidores por ID e público externo
 ```text
 projeto-poo/
 ├── README.md
-├── Doxyfile      # configuração para gerar a documentação
-├── main.py       # demonstração de uso
-├── usuarios.py   # Usuario, subclasses e CarteiraDigital
-├── pedidos.py    # Pedido, ItemCardapio e MetodoPagamento
-└── caixa.py      # pagamento em espécie e retirada
-```
+├── Doxyfile
+├── back_end/
+│   ├── main.py
+│   ├── usuarios.py
+│   ├── pedidos.py
+│   └── caixa.py
+└── interface_grafica/
+    └── interface_ru.py
+    └── main_gui.py      
 
 ## Como executar
 
