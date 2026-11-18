@@ -16,7 +16,7 @@ for caminho in (RAIZ_PROJETO, PASTA_BACKEND):
         sys.path.insert(0, caminho)
 
 from back_end.caixa import CaixaRU
-from back_end.pedidos import MetodoPagamento, Pedido, Cardapio
+from back_end.pedidos import MetodoPagamento, Pedido, criar_cardapio_padrao
 from back_end.usuarios import Aluno, Externo, Servidor, Usuario
 
 
@@ -30,7 +30,7 @@ class TelaSistemaRU(tk.Tk):
         self.title("Sistema Digital do RU — UTFPR")
 
         # Instanciação direta dos objetos da camada de lógica
-        self.cardapio  =  Cardapio()
+        self.cardapio  =  criar_cardapio_padrao()
         self.caixa  =  CaixaRU()
         self.pedido_atual: Pedido | None  =  None
         self.proximo_id_pedido  =  1
