@@ -9,13 +9,15 @@ import sys
 import tkinter as tk
 from tkinter import messagebox
 
-RAIZ_PROJETO  =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if RAIZ_PROJETO not in sys.path:
-    sys.path.insert(0, RAIZ_PROJETO)
+RAIZ_PROJETO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PASTA_BACKEND = os.path.join(RAIZ_PROJETO, "back_end")
+for caminho in (RAIZ_PROJETO, PASTA_BACKEND):
+    if caminho not in sys.path:
+        sys.path.insert(0, caminho)
 
-from logica.caixa import CaixaRU
-from logica.pedidos import MetodoPagamento, Pedido, criar_cardapio_padrao
-from logica.usuarios import Aluno, Externo, Servidor, Usuario
+from back_end.caixa import CaixaRU
+from back_end.pedidos import MetodoPagamento, Pedido, Cardapio
+from back_end.usuarios import Aluno, Externo, Servidor, Usuario
 
 
 class TelaSistemaRU(tk.Tk):
@@ -28,7 +30,7 @@ class TelaSistemaRU(tk.Tk):
         self.title("Sistema Digital do RU — UTFPR")
 
         # Instanciação direta dos objetos da camada de lógica
-        self.cardapio  =  criar_cardapio_padrao()
+        self.cardapio  =  Cardapio()
         self.caixa  =  CaixaRU()
         self.pedido_atual: Pedido | None  =  None
         self.proximo_id_pedido  =  1
